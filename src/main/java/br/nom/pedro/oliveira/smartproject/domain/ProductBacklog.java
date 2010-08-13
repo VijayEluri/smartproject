@@ -39,8 +39,20 @@ public final class ProductBacklog {
     private ProductBacklog() {
     }
 
+    /**
+     * 
+     * @param project
+     */
     public ProductBacklog(Project project) {
         this.project = project;
+    }
+
+    /**
+     *
+     * @return Project the current Project
+     */
+    public Project getProject() {
+        return project;
     }
 
     /**
@@ -147,7 +159,7 @@ public final class ProductBacklog {
         }
 
         final ProductBacklog other = (ProductBacklog) obj;
-        if (this.project != other.project && (this.project == null || !this.project.equals(other.project))) {
+        if (this.project != other.getProject() && (this.project == null || !this.project.equals(other.project))) {
             return false;
         }
         if (this.projectStories != other.projectStories && (this.projectStories == null || !this.projectStories.equals(other.projectStories))) {
