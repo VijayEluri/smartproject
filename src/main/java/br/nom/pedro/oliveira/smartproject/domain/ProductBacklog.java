@@ -132,10 +132,10 @@ public final class ProductBacklog {
      * @param currentSprints the currentSprints to set
      */
     public void setCurrentSprints(Set<Sprint> currentSprints) {
-        this.currentSprints = currentSprints;
+        if (currentSprints != null) {
+            this.currentSprints.addAll(currentSprints);
+        }
     }
-
-
 
     @Override
     public boolean equals(Object obj) {
