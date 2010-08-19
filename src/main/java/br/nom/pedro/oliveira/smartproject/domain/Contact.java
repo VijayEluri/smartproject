@@ -1,19 +1,22 @@
 /*
  *  Copyright (C) 2010 Pedro T. Oliveira <pedro.oliveira.nom.br>
- * 
+ *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
- * 
+ *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- * 
+ *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+
+
 package br.nom.pedro.oliveira.smartproject.domain;
 
 /**
@@ -24,15 +27,15 @@ package br.nom.pedro.oliveira.smartproject.domain;
  */
 public final class Contact {
 
-    private int primaryPhoneNumber;
-    private int secondaryPhoneNumber;
-    private String email;
     /** not required, in Portuguese called "ramal" */
-    private int branch;
+    private int    branch;
+    private String email;
+    private int    primaryPhoneNumber;
+    private int    secondaryPhoneNumber;
 
     public Contact(int primaryPhoneNumber, String email) {
         this.primaryPhoneNumber = primaryPhoneNumber;
-        this.email = email;
+        this.email              = email;
     }
 
     /**
@@ -93,9 +96,8 @@ public final class Contact {
 
     @Override
     public String toString() {
-        return "Contact{" + "primaryPhoneNumber=" + primaryPhoneNumber
-                + "secondaryPhoneNumber=" + secondaryPhoneNumber
-                + "email=" + email + "branch=" + branch + '}';
+        return "Contact{" + "primaryPhoneNumber=" + primaryPhoneNumber + "secondaryPhoneNumber=" + secondaryPhoneNumber
+               + "email=" + email + "branch=" + branch + '}';
     }
 
     @Override
@@ -103,11 +105,13 @@ public final class Contact {
         if (obj == null) {
             return false;
         }
+
         if (getClass() != obj.getClass()) {
             return false;
         }
 
         final Contact other = (Contact) obj;
+
         if (this.primaryPhoneNumber != other.getPrimaryPhoneNumber()) {
             return false;
         }
@@ -117,25 +121,32 @@ public final class Contact {
         }
 
         if ((this.email == null)
-                ? (other.getEmail() != null)
-                : !this.email.equals(other.getEmail())) {
-
+            ? (other.getEmail() != null)
+            : !this.email.equals(other.getEmail())) {
             return false;
         }
 
         if (this.branch != other.getBranch()) {
             return false;
         }
+
         return true;
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
+
         hash = 89 * hash + this.primaryPhoneNumber;
         hash = 89 * hash + this.secondaryPhoneNumber;
-        hash = 89 * hash + (this.email != null ? this.email.hashCode() : 0);
+        hash = 89 * hash + ((this.email != null)
+                            ? this.email.hashCode()
+                            : 0);
         hash = 89 * hash + this.branch;
+
         return hash;
     }
 }
+
+
+//~ Formatted by Jindent --- http://www.jindent.com

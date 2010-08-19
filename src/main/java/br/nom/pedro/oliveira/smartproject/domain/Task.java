@@ -19,16 +19,26 @@
 
 package br.nom.pedro.oliveira.smartproject.domain;
 
+//~--- JDK imports ------------------------------------------------------------
+
+import java.sql.Time;
+
+import java.util.Date;
+
 /**
  *
  * @author Pedro T. Oliveira <pedro.oliveira.nom.br>
  * @version
  * @since
  */
-public class ValueFormatException extends RuntimeException {
-    private static final long serialVersionUID = -2625659567163440539L;
-
-    public ValueFormatException() {}
+public class Task {
+    private boolean assigned;
+    private boolean completed;
+    private Date    finishedDate;
+    private boolean locked;
+    private Time    progress;
+    private Date    startDate;
+    private String  taskName;
 }
 
 

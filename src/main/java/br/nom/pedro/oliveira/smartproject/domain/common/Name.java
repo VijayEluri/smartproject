@@ -17,7 +17,7 @@
 
 
 
-package br.nom.pedro.oliveira.smartproject.domain;
+package br.nom.pedro.oliveira.smartproject.domain.common;
 
 /**
  *
@@ -25,10 +25,18 @@ package br.nom.pedro.oliveira.smartproject.domain;
  * @version
  * @since
  */
-public class ValueFormatException extends RuntimeException {
-    private static final long serialVersionUID = -2625659567163440539L;
+public class Name {
+    private ComplementName complementname;
+    private FirstName      firstName;
 
-    public ValueFormatException() {}
+    public Name(FirstName name) {
+        this.firstName = name;
+    }
+
+    public Name(FirstName firstName, ComplementName complementName) {
+        this.firstName      = firstName;
+        this.complementname = complementName;
+    }
 }
 
 

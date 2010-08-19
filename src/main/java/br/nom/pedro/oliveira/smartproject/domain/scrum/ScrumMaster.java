@@ -17,7 +17,11 @@
 
 
 
-package br.nom.pedro.oliveira.smartproject.domain;
+package br.nom.pedro.oliveira.smartproject.domain.scrum;
+
+//~--- non-JDK imports --------------------------------------------------------
+
+import br.nom.pedro.oliveira.smartproject.domain.ProjectManager;
 
 /**
  *
@@ -25,11 +29,7 @@ package br.nom.pedro.oliveira.smartproject.domain;
  * @version
  * @since
  */
-public class ValueFormatException extends RuntimeException {
-    private static final long serialVersionUID = -2625659567163440539L;
-
-    public ValueFormatException() {}
-}
+public class ScrumMaster extends ProjectManager {}
 
 
 //~ Formatted by Jindent --- http://www.jindent.com

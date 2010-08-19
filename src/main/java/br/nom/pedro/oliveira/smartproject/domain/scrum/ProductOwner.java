@@ -17,36 +17,44 @@
 
 
 
-package br.nom.pedro.oliveira.smartproject.domain;
+package br.nom.pedro.oliveira.smartproject.domain.scrum;
 
 //~--- non-JDK imports --------------------------------------------------------
 
+import br.nom.pedro.oliveira.smartproject.domain.Contact;
+import br.nom.pedro.oliveira.smartproject.domain.Project;
 import br.nom.pedro.oliveira.smartproject.domain.common.Address;
 
+//~--- JDK imports ------------------------------------------------------------
+
+import java.util.Collections;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 /**
- * A Team Member Entity
+ * ProductOwner Entity
+ *
  * @author Pedro T. Oliveira <pedro.oliveira.nom.br>
  * @version 1.0
  * @since 1.0
  */
-public final class TeamMember {
+public class ProductOwner {
     private Address address;
     private Contact contact;
-    private String  name;
-    private String  nickName;
-    private Team    team;
 
-    /** Cannot create a default instance */
-    private TeamMember() {}
+    // Required Parameters
+    private String             name;
+    private SortedSet<Project> projects;
 
-    /**
-     *
-     * @param nickName
-     * @param team
-     */
-    public TeamMember(String nickName, Team team) {
-        this.nickName = nickName;
-        this.team     = team;
+    // Optional Parameters
+    private String title;
+
+    /** cannot create default instance */
+    private ProductOwner() {}
+
+    public ProductOwner(String name) {
+        this.name     = name;
+        this.projects = Collections.synchronizedSortedSet(new TreeSet<Project>());
     }
 
     /**
@@ -57,24 +65,17 @@ public final class TeamMember {
     }
 
     /**
-     * @param name the name to set
+     * @return the title
      */
-    public void setName(String name) {
-        this.name = name;
+    public String getTitle() {
+        return title;
     }
 
     /**
-     * @return the nickName
+     * @param title the title to set
      */
-    public String getNickName() {
-        return nickName;
-    }
-
-    /**
-     * @param nickName the nickName to set
-     */
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     /**
@@ -105,18 +106,17 @@ public final class TeamMember {
         this.address = address;
     }
 
-    /**
-     * @return the team
-     */
-    public Team getTeam() {
-        return team;
+    public void addProject(Project project) {
+        this.projects.add(project);
     }
 
     /**
-     * @param team the team to set
+     * Retreive a Sorted Set of Projects
+     *
+     * @return immutable set of Projects for this ProductOwner
      */
-    public void setTeam(Team team) {
-        this.team = team;
+    public SortedSet<Project> retreiveProjects() {
+        return Collections.unmodifiableSortedSet(projects);
     }
 }
 

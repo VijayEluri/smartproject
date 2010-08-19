@@ -25,10 +25,12 @@ package br.nom.pedro.oliveira.smartproject.domain;
  * @version
  * @since
  */
-public class ValueFormatException extends RuntimeException {
-    private static final long serialVersionUID = -2625659567163440539L;
+public abstract class User {
+    private UserId userId;
 
-    public ValueFormatException() {}
+    public UserId getUserId() {
+        return userId;
+    }
 }
 
 
