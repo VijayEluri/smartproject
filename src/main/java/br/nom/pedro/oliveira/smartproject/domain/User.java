@@ -14,24 +14,35 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-
-
 package br.nom.pedro.oliveira.smartproject.domain;
 
 /**
- *
+ * Represents a System User
  * @author Pedro T. Oliveira <pedro.oliveira.nom.br>
- * @version
- * @since
+ * @version 1.0
+ * @since 1.0
  */
-public abstract class User {
+public class User {
+
     private UserId userId;
+    private UserCredentials credentials;
+
+    public User(UserId userId, UserCredentials credentials) {
+        this.userId = userId;
+        this.credentials = credentials;
+    }
 
     public UserId getUserId() {
         return userId;
     }
+
+    public UserCredentials getCredentials() {
+        return credentials;
+    }
+
+    @Override
+    public String toString() {
+        return "User { " + " userId=" + userId + ", credentials=" + credentials
+                + " }";
+    }
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com

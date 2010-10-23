@@ -20,22 +20,28 @@
 package br.nom.pedro.oliveira.smartproject.domain;
 
 /**
- * A value Object that represents de User Global Identification
+ * The User Credentials on the System
  * @author Pedro T. Oliveira <pedro.oliveira.nom.br>
- * @version
- * @since
+ * @version 1.0
+ * @since 1.0
  */
-public class UserId {
+public class UserCredentials {
 
-    private String userName;
+     private Password password;
+     private AcessLevel accessLevel;
 
-    public UserId(String userName) {
-        this.userName = userName;
+    public UserCredentials(Password password, AcessLevel accessLevel) {
+        this.password = password;
+        this.accessLevel = accessLevel;
+    }
+
+    public AcessLevel getAccessLevel() {
+        return accessLevel;
     }
 
     @Override
     public String toString() {
-        return "UserId { " + "userName=" + userName + " }";
+        return "UserCredentials { " + "password=" + password.getValue() + "accessLevel=" + accessLevel + '}';
     }
 
 }

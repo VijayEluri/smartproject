@@ -14,9 +14,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-
-
 package br.nom.pedro.oliveira.smartproject.domain;
 
 /**
@@ -26,8 +23,23 @@ package br.nom.pedro.oliveira.smartproject.domain;
  * @since
  */
 public class Password {
-    private String value;
+
+    private Long value;
+
+    public Password() {
+    }
+
+    public Password newPassword(String password) {
+        this.value = encrypty(password);
+        return this;
+    }
+
+    private long encrypty(String password) {
+        //Encryptation Algoritmy
+        return Long.valueOf(password);
+    }
+
+    public long getValue() {
+        return value;
+    }
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com
