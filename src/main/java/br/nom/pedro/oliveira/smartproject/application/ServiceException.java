@@ -14,32 +14,25 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package br.nom.pedro.oliveira.smartproject.domain;
+package br.nom.pedro.oliveira.smartproject.application;
 
 /**
+ * Standard Service Exception, all AbstractDomainService should throw this
+ * Exception.
  *
  * @author Pedro T. Oliveira <pedro.oliveira.nom.br>
- * @version
- * @since
  */
-public class Password {
+public class ServiceException extends Exception {
 
-    private Long value;
-
-    public Password() {
+    public ServiceException(String message) {
+        super(message);
     }
 
-    public Password newPassword(String password) {
-        this.value = encrypty(password);
-        return this;
+    public ServiceException(Throwable cause) {
+        super(cause);
     }
 
-    private long encrypty(String password) {
-        //Encryptation Algoritmy
-        return Long.valueOf(password);
-    }
-
-    public long getValue() {
-        return value;
+    public ServiceException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

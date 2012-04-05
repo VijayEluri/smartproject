@@ -17,41 +17,52 @@
 package br.nom.pedro.oliveira.smartproject.domain;
 
 import com.ppm.model.ValueObject;
+import java.util.Objects;
 
 /**
- * A value Object that represents de User Global Identification
  *
  * @author Pedro T. Oliveira <pedro.oliveira.nom.br>
  * @version
  * @since
  */
-public class UserId extends ValueObject {
+public class UserToken extends ValueObject {
 
-    private final String userName;
-    private final String password;
+    private final String value;
 
-    public UserId(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
+    public UserToken(final String token) {
+        this.value = token;
     }
 
-    /**
-     * Creates a new UserId
-     *
-     * @param userName
-     * @param password
-     * @return
-     */
-    public static UserId newId(String userName, String password) {
-        return new UserId(userName, password);
+    public static UserToken newToken(final String token) {
+        return new UserToken(token);
     }
 
-    public String getUserName() {
-        return userName;
+    public String getValue() {
+        return value;
     }
-    
+
     @Override
     public String toString() {
-        return "UserId{" + "userName=" + userName + ", password=" + password + '}';
+        return "UserToken{" + "value=" + value + '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        
+        if (obj instanceof UserToken) {
+            final UserToken other = (UserToken) obj;
+            return Objects.equals(this.value, other.value);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 11 * hash + Objects.hashCode(this.value);
+        return hash;
+    }    
 }
