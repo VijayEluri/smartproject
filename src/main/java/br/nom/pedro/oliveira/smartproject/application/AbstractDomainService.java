@@ -35,9 +35,9 @@ import org.springframework.stereotype.Service;
 @Service
 public abstract class AbstractDomainService {
 
-    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+    final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private void log(String msg, Severity s) {
+    protected void log(String msg, Severity s) {
 
         if (INFO.equals(s) && logger.isInfoEnabled()) {
             logger.info(msg);

@@ -20,6 +20,7 @@ import br.nom.pedro.oliveira.smartproject.domain.Repository;
 import br.nom.pedro.oliveira.smartproject.domain.User;
 import br.nom.pedro.oliveira.smartproject.domain.UserCredentials;
 import br.nom.pedro.oliveira.smartproject.domain.UserId;
+import com.ppm.infrastructure.utils.log.Severity;
 import com.ppm.model.Identity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
@@ -29,12 +30,12 @@ import org.springframework.util.Assert;
  *
  * @author Pedro T. Oliveira <pedro.oliveira.nom.br>
  */
-public final class UserServicesImpl extends AbstractDomainService implements UserServices {
+public final class UserServicesProvider extends AbstractDomainService implements UserServices {
 	
     @Autowired(required=true)
     private final Repository<User> userRepository;
 
-    public UserServicesImpl(final Repository<User> userRepository) {
+    public UserServicesProvider(final Repository<User> userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -47,7 +48,7 @@ public final class UserServicesImpl extends AbstractDomainService implements Use
             return (user == null) ? new User(userId, UserCredentials.userNotExist()) : user;
 
         } catch (Exception ex) {
-            logger.error(ex.getMessage(), ex);
+            log(ex.getMessage(), Severity.ERROR);            
             throw new ServiceException(ex);
         }
     }

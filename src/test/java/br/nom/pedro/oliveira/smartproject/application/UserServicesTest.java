@@ -9,14 +9,17 @@ import com.ppm.model.Identity;
 import org.junit.*;
 import org.mockito.Mock;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
 import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 
 /**
  *
  * @author Pedro T. Oliveira <pedro.oliveira20@gmail.com>
  */
+@RunWith(MockitoJUnitRunner.class)
 public class UserServicesTest {
     
     @Mock Repository<User> userRepository;
@@ -28,7 +31,7 @@ public class UserServicesTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        service = new UserServicesImpl(userRepository);
+        service = new UserServicesProvider(userRepository);
     }
 
     /**
