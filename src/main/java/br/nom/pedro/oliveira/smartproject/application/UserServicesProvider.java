@@ -31,8 +31,8 @@ import org.springframework.util.Assert;
  * @author Pedro T. Oliveira <pedro.oliveira.nom.br>
  */
 public final class UserServicesProvider extends AbstractDomainService implements UserServices {
-	
-    @Autowired(required=true)
+
+    @Autowired(required = true)
     private final Repository<User> userRepository;
 
     public UserServicesProvider(final Repository<User> userRepository) {
@@ -44,18 +44,18 @@ public final class UserServicesProvider extends AbstractDomainService implements
         try {
 
             Assert.notNull(userId, "User Id [null]");
-            final User user = userRepository.findById(new Identity<>(userId));            
-            return (user == null) ? new User(userId, UserCredentials.userNotExist()) : user;
+            final User user = userRepository.findById(new Identity<>(userId));
+            return ( user == null ) ? new User(userId, UserCredentials.userNotExist()) : user;
 
         } catch (Exception ex) {
-            log(ex.getMessage(), Severity.ERROR);            
+            log(ex.getMessage(), Severity.ERROR);
             throw new ServiceException(ex);
         }
     }
 
-	@Override
-	public User register(UserId userId) throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public User register(UserId userId) throws ServiceException {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

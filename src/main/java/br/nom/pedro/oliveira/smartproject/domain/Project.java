@@ -14,17 +14,10 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-
-
 package br.nom.pedro.oliveira.smartproject.domain;
-
-//~--- non-JDK imports --------------------------------------------------------
 
 import br.nom.pedro.oliveira.smartproject.domain.common.Description;
 import br.nom.pedro.oliveira.smartproject.domain.scrum.UserStory;
-
-//~--- JDK imports ------------------------------------------------------------
 
 import java.util.Date;
 import java.util.SortedSet;
@@ -37,17 +30,15 @@ import java.util.SortedSet;
  * @since
  */
 public class Project {
-    private Metodology           choosedMetodology;
-    private String               code;
-    private Description          description;
-    private boolean              finished;
-    private String               name;
-    private Date                 startDate;
-    private Date                 targetDate;
-    private Team                 team;
-    private SortedSet<Team>      teams;
+
+    private Metodology choosedMetodology;
+    private String code;
+    private Description description;
+    private boolean finished;
+    private String name;
+    private Date startDate;
+    private Date targetDate;
+    private Team team;
+    private SortedSet<Team> teams;
     private SortedSet<UserStory> userStories;
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com

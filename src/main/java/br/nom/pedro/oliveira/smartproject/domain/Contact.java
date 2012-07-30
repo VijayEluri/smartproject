@@ -14,28 +14,28 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-
-
 package br.nom.pedro.oliveira.smartproject.domain;
 
 /**
  * Contact entity
+ *
  * @author Pedro T. Oliveira <pedro.oliveira.nom.br>
  * @version 1.0
  * @since 1.0
  */
 public final class Contact {
 
-    /** not required, in Portuguese called "ramal" */
-    private int    branch;
+    /**
+     * not required, in Portuguese called "ramal"
+     */
+    private int branch;
     private String email;
-    private int    primaryPhoneNumber;
-    private int    secondaryPhoneNumber;
+    private int primaryPhoneNumber;
+    private int secondaryPhoneNumber;
 
     public Contact(int primaryPhoneNumber, String email) {
         this.primaryPhoneNumber = primaryPhoneNumber;
-        this.email              = email;
+        this.email = email;
     }
 
     /**
@@ -97,7 +97,7 @@ public final class Contact {
     @Override
     public String toString() {
         return "Contact{" + "primaryPhoneNumber=" + primaryPhoneNumber + "secondaryPhoneNumber=" + secondaryPhoneNumber
-               + "email=" + email + "branch=" + branch + '}';
+                + "email=" + email + "branch=" + branch + '}';
     }
 
     @Override
@@ -120,9 +120,9 @@ public final class Contact {
             return false;
         }
 
-        if ((this.email == null)
-            ? (other.getEmail() != null)
-            : !this.email.equals(other.getEmail())) {
+        if (( this.email == null )
+                ? ( other.getEmail() != null )
+                : !this.email.equals(other.getEmail())) {
             return false;
         }
 
@@ -139,9 +139,9 @@ public final class Contact {
 
         hash = 89 * hash + this.primaryPhoneNumber;
         hash = 89 * hash + this.secondaryPhoneNumber;
-        hash = 89 * hash + ((this.email != null)
-                            ? this.email.hashCode()
-                            : 0);
+        hash = 89 * hash + ( ( this.email != null )
+                ? this.email.hashCode()
+                : 0 );
         hash = 89 * hash + this.branch;
 
         return hash;

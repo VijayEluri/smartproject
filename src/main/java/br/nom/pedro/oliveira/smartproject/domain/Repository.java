@@ -8,6 +8,5 @@ import com.ppm.model.Entity;
  * 
  * @author Pedro T. Oliveira
  */
-@org.springframework.stereotype.Repository
 public interface Repository<T extends Entity> extends BasicDaoOperations<T> {
 }

@@ -14,12 +14,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-
-
 package br.nom.pedro.oliveira.smartproject.domain;
-
-//~--- JDK imports ------------------------------------------------------------
 
 import java.util.Set;
 
@@ -30,9 +25,7 @@ import java.util.Set;
  * @since 1.0
  */
 public abstract class Team {
+
     private Set<TeamMember> members;
-    private Set<Project>    projects;
+    private Set<Project> projects;
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com

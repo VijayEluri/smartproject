@@ -1,10 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.nom.pedro.oliveira.smartproject.aspect;
 
-import com.db4o.ObjectContainer;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 
@@ -13,11 +10,25 @@ import org.aspectj.lang.annotation.Before;
  * @author Pedro T. Oliveira <pedro.oliveira.nom.br>
  */
 @Aspect
-public class ApplicationAspect {
+public final class ApplicationAspect {
+    
+    private static final String APP_POINTCUT = "br.nom.pedro.oliveira.smartproject.aspect.SystemLayers.application()";
+    
+    @Before(APP_POINTCUT)
+    public void beforeApplication() {
+    }
+    
+        /**
+     * On after service layer.
+     */
+    @AfterReturning(APP_POINTCUT)
+    public void onAfterServiceLayer() {
+    }
 
-    @Before(value = "br.nom.pedro.oliveira.smartproject.aspect.SystemLayers.application()",
-            argNames = "rootObjectContainer")
-    public void beforeApplication(ObjectContainer rootObjectContainer) {
-        
+    /**
+     * On exception service layer.
+     */
+    @AfterThrowing(pointcut = APP_POINTCUT, throwing = "ex")
+    public void onExceptionServiceLayer(final Exception ex) {
     }
 }

@@ -14,30 +14,30 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-
-
 package br.nom.pedro.oliveira.smartproject.domain;
-
-//~--- non-JDK imports --------------------------------------------------------
 
 import br.nom.pedro.oliveira.smartproject.domain.common.Address;
 
 /**
  * A Team Member Entity
+ *
  * @author Pedro T. Oliveira <pedro.oliveira.nom.br>
  * @version 1.0
  * @since 1.0
  */
 public final class TeamMember {
+
     private Address address;
     private Contact contact;
-    private String  name;
-    private String  nickName;
-    private Team    team;
+    private String name;
+    private String nickName;
+    private Team team;
 
-    /** Cannot create a default instance */
-    private TeamMember() {}
+    /**
+     * Cannot create a default instance
+     */
+    private TeamMember() {
+    }
 
     /**
      *
@@ -46,7 +46,7 @@ public final class TeamMember {
      */
     public TeamMember(String nickName, Team team) {
         this.nickName = nickName;
-        this.team     = team;
+        this.team = team;
     }
 
     /**
@@ -119,6 +119,3 @@ public final class TeamMember {
         this.team = team;
     }
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com

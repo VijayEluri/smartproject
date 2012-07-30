@@ -29,6 +29,7 @@ public class UserId extends ValueObject {
 
     private final String userName;
     private final String password;
+    private String passPhrase;
 
     public UserId(String userName, String password) {
         this.userName = userName;
@@ -49,7 +50,19 @@ public class UserId extends ValueObject {
     public String getUserName() {
         return userName;
     }
-    
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getPassPhrase() {
+        return passPhrase;
+    }
+
+    public void setPassPhrase(String passPhrase) {
+        this.passPhrase = passPhrase;
+    }
+
     @Override
     public String toString() {
         return "UserId{" + "userName=" + userName + ", password=" + password + '}';

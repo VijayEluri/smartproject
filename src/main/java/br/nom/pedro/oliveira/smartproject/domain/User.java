@@ -16,7 +16,9 @@
  */
 package br.nom.pedro.oliveira.smartproject.domain;
 
+import com.ppm.model.Entity;
 import com.ppm.model.Identity;
+import java.util.Objects;
 
 /**
  * A System User
@@ -25,10 +27,10 @@ import com.ppm.model.Identity;
  * @version 1.0
  * @since 1.0
  */
-public class User extends DomainEntity {
+public class User extends Entity {
 
-    private final Identity<UserId> id;
     private UserCredentials credentials;
+    private String email;
     
     public User(final UserId userId) {
         this.id = new Identity<>(userId);
@@ -42,11 +44,11 @@ public class User extends DomainEntity {
     public static User createUser(final UserId userId) {
         return new User(userId);
     }
-    
+
     public static User createUser(final UserId userId, UserCredentials credentials) {
         return new User(userId, credentials);
     }
-    
+
     public void withCredentials(final UserCredentials credentials) {
         this.credentials = credentials;
     }
@@ -60,9 +62,9 @@ public class User extends DomainEntity {
     }
 
     public boolean isAuthenticated() {
-        return (getCredentials() != null
+        return ( getCredentials() != null
                 && getCredentials().getAccessLevel() != null
-                && getCredentials().getAccessLevel().ordinal() > AcessLevel.NONE.ordinal());
+                && getCredentials().getAccessLevel().ordinal() > AcessLevel.NONE.ordinal() );
     }
 
     @Override
@@ -71,38 +73,51 @@ public class User extends DomainEntity {
     }
 
     @Override
-    public Identity<UserId> getId() {     
-        return id;
+    public Identity<UserId> getId() {
+        return (Identity<UserId>) id;
     }
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (!(obj instanceof User))
-			return false;
-		User other = (User) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final User other = (User) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.credentials, other.credentials)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 71 * hash + Objects.hashCode(this.id);
+        hash = 71 * hash + Objects.hashCode(this.credentials);
+        hash = 71 * hash + Objects.hashCode(this.email);
+        return hash;
+    }
 }

@@ -9,7 +9,7 @@
     <artifactId>smartproject</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>smartproject</name>
+    <name>smartproject-domain</name>
     <url>http://maven.apache.org</url>
     <build>
         <plugins>
@@ -27,26 +27,6 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>com.ppm</groupId>
-            <artifactId>infrastructure.utils</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ppm</groupId>
-            <artifactId>infrastructure.ioc</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ppm</groupId>
-            <artifactId>infrastructure.validation</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>smartproject-integration</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
             <version>1.9.0</version>
@@ -59,7 +39,26 @@
             <version>4.8.1</version>
             <scope>test</scope>
         </dependency>
-    	
+        <dependency>
+            <groupId>com.ppm</groupId>
+            <artifactId>infrastructure.persistence</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ppm</groupId>
+            <artifactId>infrastructure.ioc</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ppm</groupId>
+            <artifactId>infrastructure.utils</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ppm</groupId>
+            <artifactId>infrastructure.validation</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <description>
         A Project Management Tool Suite. Written to be simple, Manageable and Fast.

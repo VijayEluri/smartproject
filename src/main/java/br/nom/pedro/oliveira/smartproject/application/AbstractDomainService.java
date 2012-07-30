@@ -23,10 +23,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
- * This class represent a Abstract Domain Service, All domain services
- * extends this class. <p> This class implements behavior that will
- * be inherited to all services. <p> For default, domain services don't have
- * behavior, then this class will implement only infrastructure behavior needed
+ * This class represent a Abstract Domain Service, All domain services extends
+ * this class. <p> This class implements behavior that will be inherited to all
+ * services. <p> For default, domain services don't have behavior, then this
+ * class will implement only infrastructure behavior needed
  *
  * @author Pedro T. Oliveira <pedro.oliveira.nom.br>
  * @version 1.0
@@ -45,11 +45,19 @@ public abstract class AbstractDomainService {
             logger.warn(msg);
         } else if (DEBUG.equals(s) && logger.isDebugEnabled()) {
             logger.debug(msg);
-        } else if (ERROR.equals(s)) {
+        } else if (ERROR.equals(s) && logger.isErrorEnabled()) {
             logger.error(msg);
         } else {
             //The Default Log Level
             logger.trace(msg);
         }
+    }
+
+    protected void logError(final String msg) {
+        this.log(msg, ERROR);
+    }
+
+    protected void logInfo(final String msg) {
+        this.log(msg, INFO);
     }
 }
