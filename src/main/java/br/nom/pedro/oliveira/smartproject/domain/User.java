@@ -18,7 +18,6 @@ package br.nom.pedro.oliveira.smartproject.domain;
 
 import com.ppm.model.Entity;
 import com.ppm.model.Identity;
-import java.util.Objects;
 
 /**
  * A System User
@@ -29,11 +28,18 @@ import java.util.Objects;
  */
 public class User extends Entity {
 
+    /**
+     * The User Code
+     */
+    private Integer userCode;
+    /**
+     * The UserCredentials
+     */
     private UserCredentials credentials;
-    private String email;
-    
+
     public User(final UserId userId) {
         this.id = new Identity<>(userId);
+        this.credentials = UserCredentials.blockedAccess();
     }
 
     public User(final UserId userId, final UserCredentials credentials) {
@@ -42,14 +48,14 @@ public class User extends Entity {
     }
 
     public static User createUser(final UserId userId) {
-        return new User(userId);
+        return new User(userId, UserCredentials.blockedAccess());
     }
 
     public static User createUser(final UserId userId, UserCredentials credentials) {
         return new User(userId, credentials);
     }
 
-    public void withCredentials(final UserCredentials credentials) {
+    public void changeCredentials(final UserCredentials credentials) {
         this.credentials = credentials;
     }
 
@@ -57,67 +63,26 @@ public class User extends Entity {
         return getId().value();
     }
 
+    @Override
+    public Identity<UserId> getId() {
+        return (Identity<UserId>) id;
+    }
+
     public UserCredentials getCredentials() {
         return credentials;
+    }
+
+    public Integer getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(Integer userCode) {
+        this.userCode = userCode;
     }
 
     public boolean isAuthenticated() {
         return ( getCredentials() != null
                 && getCredentials().getAccessLevel() != null
                 && getCredentials().getAccessLevel().ordinal() > AcessLevel.NONE.ordinal() );
-    }
-
-    @Override
-    public String toString() {
-        return "User { " + " identity=" + id + ", credentials=" + credentials + " }";
-    }
-
-    @Override
-    public Identity<UserId> getId() {
-        return (Identity<UserId>) id;
-    }
-
-    /**
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final User other = (User) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        if (!Objects.equals(this.credentials, other.credentials)) {
-            return false;
-        }
-        if (!Objects.equals(this.email, other.email)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 71 * hash + Objects.hashCode(this.id);
-        hash = 71 * hash + Objects.hashCode(this.credentials);
-        hash = 71 * hash + Objects.hashCode(this.email);
-        return hash;
     }
 }

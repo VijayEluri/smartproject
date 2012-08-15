@@ -34,7 +34,12 @@ public class UserToken extends ValueObject {
     }
 
     public static UserToken newToken(final String token) {
+        Objects.requireNonNull(token, "The token value cant be [null]");
         return new UserToken(token);
+    }
+    
+     public static UserToken blockedToken() {
+        return new UserToken("blockedtoken");
     }
 
     public String getValue() {

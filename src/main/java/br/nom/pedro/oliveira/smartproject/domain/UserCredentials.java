@@ -44,7 +44,7 @@ public class UserCredentials extends ValueObject {
     }
     
     public static UserCredentials blockedAccess() {
-        return new UserCredentials(null, AcessLevel.NONE);
+        return new UserCredentials(UserToken.blockedToken(), AcessLevel.NONE);
     }
     
     public static UserCredentials userNotExist() {

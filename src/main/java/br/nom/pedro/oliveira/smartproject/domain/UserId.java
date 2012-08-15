@@ -27,44 +27,64 @@ import com.ppm.model.ValueObject;
  */
 public class UserId extends ValueObject {
 
-    private final String userName;
-    private final String password;
-    private String passPhrase;
+	private final String userName;
+	private final String email;
+	private final String password;
+	private String passPhrase;
 
-    public UserId(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
-    }
+	public UserId(String userName, String email, String password) {
+		this.userName = userName;
+		this.email = email;
+		this.password = password;
+	}
 
-    /**
-     * Creates a new UserId
-     *
-     * @param userName
-     * @param password
-     * @return
-     */
-    public static UserId newId(String userName, String password) {
-        return new UserId(userName, password);
-    }
+	/**
+	 * Creates a new UserId
+	 *
+	 * @param userName
+	 * @param password
+	 * @return
+	 */
+	public static UserId newId(String userName, String email, String password) {
+		return new UserId(userName, email, password);
+	}
 
-    public String getUserName() {
-        return userName;
-    }
+	public static UserId newId(String aIdentity, String password) {
+		final UserId userId;
+		if (isEmail(aIdentity)) {
+			userId = new UserId(null, aIdentity, password);
+		} else {
+			userId = new UserId(aIdentity, null, password);
+		}
+		return userId;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getUserName() {
+		return userName;
+	}
 
-    public String getPassPhrase() {
-        return passPhrase;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setPassPhrase(String passPhrase) {
-        this.passPhrase = passPhrase;
-    }
+	public String getPassPhrase() {
+		return passPhrase;
+	}
 
-    @Override
-    public String toString() {
-        return "UserId{" + "userName=" + userName + ", password=" + password + '}';
-    }
+	public void setPassPhrase(String passPhrase) {
+		this.passPhrase = passPhrase;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	private static boolean isEmail(String aIdentity) {
+		throw new UnsupportedOperationException("Not yet implemented");
+	}
+
+	@Override
+	public String toString() {
+		return "UserId{" + "userName=" + userName + ", password=" + password + '}';
+	}
 }
