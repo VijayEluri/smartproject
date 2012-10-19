@@ -27,47 +27,49 @@ import java.util.Objects;
  */
 public class UserToken extends ValueObject {
 
-    private final String value;
+	private final String value;
 
-    public UserToken(final String token) {
-        this.value = token;
-    }
+	public UserToken(final String token) {
+		this.value = token;
+	}
 
-    public static UserToken newToken(final String token) {
-        Objects.requireNonNull(token, "The token value cant be [null]");
-        return new UserToken(token);
-    }
-    
-     public static UserToken blockedToken() {
-        return new UserToken("blockedtoken");
-    }
+	public static UserToken newToken(final String token) {
+		Objects.requireNonNull(token, "The token value cant be [null]");
+		return new UserToken(token);
+	}
 
-    public String getValue() {
-        return value;
-    }
+	public static UserToken blockedToken() {
+		return new UserToken("blockedtoken");
+	}
 
-    @Override
-    public String toString() {
-        return "UserToken{" + "value=" + value + '}';
-    }
+	public String getValue() {
+		return value;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        }
-        
-        if (obj instanceof UserToken) {
-            final UserToken other = (UserToken) obj;
-            return Objects.equals(this.value, other.value);
-        }
-        return false;
-    }
+	@Override
+	public int hashCode() {
+		int hash = 7;
+		hash = 37 * hash + Objects.hashCode(this.value);
+		return hash;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 11 * hash + Objects.hashCode(this.value);
-        return hash;
-    }    
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final UserToken other = (UserToken) obj;
+		if (!Objects.equals(this.value, other.value)) {
+			return false;
+		}
+		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "UserToken{" + "value=" + value + '}';
+	}
 }

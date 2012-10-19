@@ -17,6 +17,7 @@
 package br.nom.pedro.oliveira.smartproject.domain;
 
 import com.ppm.model.ValueObject;
+import java.util.Objects;
 
 /**
  * The User Credentials on the System
@@ -27,40 +28,66 @@ import com.ppm.model.ValueObject;
  */
 public class UserCredentials extends ValueObject {
 
-    private final UserToken token;
-    private final AcessLevel accessLevel;
+	private final UserToken token;
+	private final AcessLevel accessLevel;
 
-    public UserCredentials(final UserToken token, final AcessLevel accessLevel) {
-        this.token = token;
-        this.accessLevel = accessLevel;
-    }
+	public UserCredentials(final UserToken token, final AcessLevel accessLevel) {
+		this.token = token;
+		this.accessLevel = accessLevel;
+	}
 
-    public static UserCredentials newCredentials(final String token, final AcessLevel accessLevel) {
-        return new UserCredentials(UserToken.newToken(token), accessLevel);
-    }
+	public static UserCredentials newCredentials(final String token, final AcessLevel accessLevel) {
+		return new UserCredentials(UserToken.newToken(token), accessLevel);
+	}
 
-    public static UserCredentials newCredentials(final UserToken token, final AcessLevel accessLevel) {
-        return new UserCredentials(token, accessLevel);
-    }
-    
-    public static UserCredentials blockedAccess() {
-        return new UserCredentials(UserToken.blockedToken(), AcessLevel.NONE);
-    }
-    
-    public static UserCredentials userNotExist() {
-        return new UserCredentials(null, null);
-    }
+	public static UserCredentials newCredentials(final UserToken token, final AcessLevel accessLevel) {
+		return new UserCredentials(token, accessLevel);
+	}
 
-    public AcessLevel getAccessLevel() {
-        return accessLevel;
-    }
+	public static UserCredentials blockedAccess() {
+		return new UserCredentials(UserToken.blockedToken(), AcessLevel.NONE);
+	}
 
-    public String getTokenValue() {
-        return this.token.getValue();
-    }
+	public static UserCredentials userNotExist() {
+		return new UserCredentials(null, null);
+	}
 
-    @Override
-    public String toString() {
-        return "UserCredentials{" + "token=" + token + ", accessLevel=" + accessLevel + '}';
-    }
+	public AcessLevel getAccessLevel() {
+		return accessLevel;
+	}
+
+	public String getTokenValue() {
+		return this.token.getValue();
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 5;
+		hash = 37 * hash + Objects.hashCode(this.token);
+		hash = 37 * hash + (this.accessLevel != null ? this.accessLevel.hashCode() : 0);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final UserCredentials other = (UserCredentials) obj;
+		if (!Objects.equals(this.token, other.token)) {
+			return false;
+		}
+		if (this.accessLevel != other.accessLevel) {
+			return false;
+		}
+		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "UserCredentials{" + "token=" + token + ", accessLevel=" + accessLevel + '}';
+	}
 }

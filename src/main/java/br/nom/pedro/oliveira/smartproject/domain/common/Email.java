@@ -18,6 +18,7 @@ package br.nom.pedro.oliveira.smartproject.domain.common;
 
 import java.io.Serializable;
 import java.util.regex.Pattern;
+import org.springframework.util.Assert;
 
 /**
  *
@@ -27,61 +28,62 @@ import java.util.regex.Pattern;
  */
 public class Email implements Serializable, Comparable<Email> {
 
-    private static final long serialVersionUID = 6527032358723605505L;
-    private String address;
-    private final String regex = "";
-    private final String PARAMETRO_INVALIDO = "The address Cannot be null or a empty String";
-    private Pattern pattern = Pattern.compile(regex);
+	private static final long serialVersionUID = 6527032358723605505L;
+	private final String address;
+	private static final String PARAMETRO_INVALIDO = "The address Cannot be null or a empty String";
+	private static final String regex = "";
+	private static final Pattern pattern = Pattern.compile(regex);
 
-    /** Immutable */
-    private Email() {
-    }
+	public Email(final String address) {
+		Assert.notNull(address, PARAMETRO_INVALIDO);
+		Assert.isTrue(!address.isEmpty(), PARAMETRO_INVALIDO);
+		this.address = address;
+	}
 
-    public Email(String address) throws IllegalArgumentException {
-        if (address.isEmpty() || address == null) {
-            throw new IllegalArgumentException(PARAMETRO_INVALIDO);
-        }
-        this.address = address;
-    }
+	public String getAddress() {
+		return address;
+	}
 
-    public String getAddress() {
-        return address;
-    }
+	public boolean isValid() {
+		return pattern.matcher(address).matches();
+	}
+	
+	public static boolean isEmail(final String address) {
+		Assert.notNull(address, PARAMETRO_INVALIDO);
+		return pattern.matcher(address).matches();
+	}
 
-    public boolean isValid() {
-        return pattern.matcher(address).matches();
-    }
+	@Override
+	public int compareTo(Email o) {
+		return this.address.compareTo(o.getAddress());
+	}
 
-    public int compareTo(Email o) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+	@Override
+	public String toString() {
+		return "Email{" + "address=" + address + '}';
+	}
 
-    @Override
-    public String toString() {
-        return "Email{" + "address=" + address + '}';
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final Email other = (Email) obj;
+		if ((this.address == null)
+			? (other.address != null)
+			: !this.address.equals(other.address)) {
+			return false;
+		}
+		return true;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Email other = (Email) obj;
-        if ((this.address == null)
-                ? (other.address != null)
-                : !this.address.equals(other.address)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 79 * hash + (this.address != null ? this.address.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		int hash = 3;
+		hash = 79 * hash + (this.address != null ? this.address.hashCode() : 0);
+		return hash;
+	}
 }

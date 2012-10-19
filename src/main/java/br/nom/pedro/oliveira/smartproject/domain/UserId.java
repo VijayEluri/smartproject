@@ -16,7 +16,9 @@
  */
 package br.nom.pedro.oliveira.smartproject.domain;
 
+import br.nom.pedro.oliveira.smartproject.domain.common.Email;
 import com.ppm.model.ValueObject;
+import java.util.Objects;
 
 /**
  * A value Object that represents de User Global Identification
@@ -27,13 +29,11 @@ import com.ppm.model.ValueObject;
  */
 public class UserId extends ValueObject {
 
-	private final String userName;
-	private final String email;
+	private final Email email;
 	private final String password;
 	private String passPhrase;
 
-	public UserId(String userName, String email, String password) {
-		this.userName = userName;
+	public UserId(Email email, String password) {
 		this.email = email;
 		this.password = password;
 	}
@@ -45,22 +45,8 @@ public class UserId extends ValueObject {
 	 * @param password
 	 * @return
 	 */
-	public static UserId newId(String userName, String email, String password) {
-		return new UserId(userName, email, password);
-	}
-
-	public static UserId newId(String aIdentity, String password) {
-		final UserId userId;
-		if (isEmail(aIdentity)) {
-			userId = new UserId(null, aIdentity, password);
-		} else {
-			userId = new UserId(aIdentity, null, password);
-		}
-		return userId;
-	}
-
-	public String getUserName() {
-		return userName;
+	public static UserId newId(Email email, String password) {
+		return new UserId(email, password);
 	}
 
 	public String getPassword() {
@@ -75,16 +61,42 @@ public class UserId extends ValueObject {
 		this.passPhrase = passPhrase;
 	}
 
-	public String getEmail() {
+	public Email getEmail() {
 		return email;
 	}
+	
+	public String getEmailAsString() {
+		return email.getAddress();
+	}
 
-	private static boolean isEmail(String aIdentity) {
-		throw new UnsupportedOperationException("Not yet implemented");
+	@Override
+	public int hashCode() {
+		int hash = 5;
+		hash = 59 * hash + Objects.hashCode(this.email);
+		hash = 59 * hash + Objects.hashCode(this.password);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final UserId other = (UserId) obj;
+		if (!Objects.equals(this.email, other.email)) {
+			return false;
+		}
+		if (!Objects.equals(this.password, other.password)) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "UserId{" + "userName=" + userName + ", password=" + password + '}';
+		return "UserId{" + "email=" + email + ", password=" + password + ", passPhrase=" + passPhrase + '}';
 	}
 }

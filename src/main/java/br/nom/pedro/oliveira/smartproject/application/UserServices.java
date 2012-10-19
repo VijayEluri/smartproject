@@ -18,6 +18,7 @@ package br.nom.pedro.oliveira.smartproject.application;
 
 import br.nom.pedro.oliveira.smartproject.domain.User;
 import br.nom.pedro.oliveira.smartproject.domain.UserId;
+import br.nom.pedro.oliveira.smartproject.domain.common.Password;
 
 /**
  * Smart Project User General Services
@@ -26,25 +27,50 @@ import br.nom.pedro.oliveira.smartproject.domain.UserId;
  */
 public interface UserServices {
 
-    /**
-     * Authenticate a User in the system, and return this user whith the
-     * credential. If the User is not Authenticated the UserCredential will be
-     * invalid.
-     *
-     * @param userId
-     * @return a Authenticated or not User.
-     * @throws ServiceException
-     * @see {@link User#isAuthenticated()}
-     */
-    User authenticate(final UserId userId) throws ServiceException;
-    
-    /**
-     * Register a new user in the system, if this user can be registred, also
-     * throw a service exception.
-     * 
-     * @param userId
-     * @return the Registred User.
-     * @throws ServiceException
-     */
-    User register(final UserId userId) throws ServiceException;
+	/**
+	 * Authenticate a User in the system, and return this user whith the
+	 * credential. If the User is not Authenticated the UserCredential will be
+	 * invalid.
+	 *
+	 * @param userId
+	 * @return a Authenticated or not User.
+	 * @throws ServiceException
+	 * @see {@link User#isAuthenticated()}
+	 */
+	User authenticate(final User user) throws ServiceException;
+
+	/**
+	 * Authenticate a User in the system, and return this user whith the
+	 * credential. If the User is not Authenticated the UserCredential will be
+	 * invalid.
+	 *
+	 * @param userId
+	 * @return a Authenticated or not User.
+	 * @throws ServiceException
+	 * @see {@link User#isAuthenticated()}
+	 */
+	User authenticate(final UserId userid) throws ServiceException;
+
+	/**
+	 * Authenticate a User in the system, and return this user whith the
+	 * credential. If the User is not Authenticated the UserCredential will be
+	 * invalid.
+	 *
+	 * @param userName
+	 * @param password
+	 * @return a Authenticated or not User.
+	 * @throws ServiceException
+	 * @see {@link User#isAuthenticated()}
+	 */
+	User authenticate(final String userName, final Password password) throws ServiceException;
+
+	/**
+	 * Register a new user in the system, if this user can be registred, also
+	 * throw a service exception.
+	 *
+	 * @param user
+	 * @return the Registred User.
+	 * @throws ServiceException
+	 */
+	User register(final User user) throws ServiceException;
 }

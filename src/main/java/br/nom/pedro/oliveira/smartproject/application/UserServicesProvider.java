@@ -20,6 +20,7 @@ import br.nom.pedro.oliveira.smartproject.domain.Repository;
 import br.nom.pedro.oliveira.smartproject.domain.User;
 import br.nom.pedro.oliveira.smartproject.domain.UserCredentials;
 import br.nom.pedro.oliveira.smartproject.domain.UserId;
+import br.nom.pedro.oliveira.smartproject.domain.common.Password;
 import com.ppm.infrastructure.utils.log.Severity;
 import com.ppm.model.Identity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,30 +33,39 @@ import org.springframework.util.Assert;
  */
 public final class UserServicesProvider extends AbstractDomainService implements UserServices {
 
-    @Autowired(required = true)
-    private final Repository<User> userRepository;
+	@Autowired(required = true)
+	private final Repository<User> userRepository;
 
-    public UserServicesProvider(final Repository<User> userRepository) {
-        this.userRepository = userRepository;
-    }
+	public UserServicesProvider(final Repository<User> userRepository) {
+		this.userRepository = userRepository;
+	}
 
-    @Override
-    public User authenticate(UserId userId) throws ServiceException {
-        try {
+	@Override
+	public User authenticate(UserId userId) throws ServiceException {
+		try {
 
-            Assert.notNull(userId, "User Id [null]");
-            final User user = userRepository.findById(new Identity<>(userId));
-            return ( user == null ) ? new User(userId, UserCredentials.userNotExist()) : user;
+			Assert.notNull(userId, "User Id [null]");
+			final User user = userRepository.findById(new Identity<>(userId));
+			return (user == null) ? new User(userId, UserCredentials.userNotExist()) : user;
 
-        } catch (Exception ex) {
-            log(ex.getMessage(), Severity.ERROR);
-            throw new ServiceException(ex);
-        }
-    }
+		} catch (Exception ex) {
+			log(ex.getMessage(), Severity.ERROR);
+			throw new ServiceException(ex);
+		}
+	}
 
-    @Override
-    public User register(UserId userId) throws ServiceException {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	@Override
+	public User authenticate(User user) throws ServiceException {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public User authenticate(String userName, Password password) throws ServiceException {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	@Override
+	public User register(User user) throws ServiceException {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
 }

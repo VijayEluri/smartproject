@@ -1,74 +1,65 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.nom.pedro.oliveira.smartproject.application;
 
-import br.nom.pedro.oliveira.smartproject.domain.*;
-import com.ppm.model.Identity;
-import org.junit.*;
-import org.mockito.Mock;
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
+import static org.mockito.Mockito.when;
+
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.*;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import br.nom.pedro.oliveira.smartproject.domain.AcessLevel;
+import br.nom.pedro.oliveira.smartproject.domain.Repository;
+import br.nom.pedro.oliveira.smartproject.domain.User;
+import br.nom.pedro.oliveira.smartproject.domain.UserCredentials;
+import br.nom.pedro.oliveira.smartproject.domain.UserId;
+import br.nom.pedro.oliveira.smartproject.domain.UserToken;
+import br.nom.pedro.oliveira.smartproject.domain.common.Email;
+
+import com.ppm.model.Identity;
+
 /**
- *
+ * 
  * @author Pedro T. Oliveira <pedro.oliveira20@gmail.com>
  */
 @RunWith(MockitoJUnitRunner.class)
 public class UserServicesTest {
 
-    @Mock
-    Repository<User> userRepository;
-    private UserServices service;
+	@Mock
+	Repository<User> userRepository;
+	private UserServices service;
 
-    /**
+	@Before
+	public void setUp() {
+		service = new UserServicesProvider(userRepository);
+	}
+
+	/**
      *
      */
-    @Before
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        service = new UserServicesProvider(userRepository);
-    }
+	@After
+	public void tearDown() {
+		service = null;
+		userRepository = null;
+	}
 
-    /**
-     *
-     */
-    @After
-    public void tearDown() {
-        service = null;
-        userRepository = null;
-    }
-
-    /**
-     * Test of authenticate method, of class UserServices.
-     *
-     * @throws Exception
-     */
-    @Test
-    public void testAuthenticate() throws Exception {
-
-        //TestCase 1
-        testWithAValidUserId(service);
-    }
-
-    private void testWithAValidUserId(UserServices service) throws Exception {
-//
-//        UserId id = UserId.newId("pedro", "pedro00");
-//
-//        User expectedUser = User.createUser(id, UserCredentials.newCredentials(UserToken.newToken("1234"), AcessLevel.DEFAULT));
-//
-//        when(userRepository.findById(new Identity<>(id))).thenReturn(expectedUser);
-//
-//        User user = service.authenticate(id);
-//
-//        assertEquals("testWithAValidUserId", expectedUser, user);
-    }
-
-    public void testRegister() throws Exception {
-        fail("Not tested");
-    }
+	@Test
+	public void testWithAValidUserId() throws Exception {
+		
+		 final UserId id = UserId.newId(new Email("pedro@test.com.br"), "passwordtest");
+		 final UserCredentials cred = UserCredentials.newCredentials(UserToken.newToken("1234"), AcessLevel.DEFAULT);
+		 final User expectedUser = User.createUser(id, cred);
+		
+		 when(userRepository.findById(new Identity<UserId>(id))).thenReturn(expectedUser);
+		
+		 Assert.assertEquals("testWithAValidUserId", expectedUser, service.authenticate(id));
+	}
+	
+	@Test
+	public void testRegister() throws Exception {
+		fail("Not tested");
+	}
 }

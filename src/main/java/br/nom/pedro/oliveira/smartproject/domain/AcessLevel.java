@@ -23,7 +23,7 @@ package br.nom.pedro.oliveira.smartproject.domain;
  * @since
  */
 public enum AcessLevel {
-    NONE,
-    DEFAULT,
-    ADMIN;
+	NONE,
+	DEFAULT,
+	ADMIN;
 }
