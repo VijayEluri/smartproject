@@ -16,27 +16,32 @@
  */
 package br.nom.pedro.oliveira.smartproject.application;
 
-import br.nom.pedro.oliveira.smartproject.domain.Repository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+
 import br.nom.pedro.oliveira.smartproject.domain.User;
 import br.nom.pedro.oliveira.smartproject.domain.UserCredentials;
 import br.nom.pedro.oliveira.smartproject.domain.UserId;
+import br.nom.pedro.oliveira.smartproject.domain.UserRepository;
 import br.nom.pedro.oliveira.smartproject.domain.common.Password;
+
 import com.ppm.infrastructure.utils.log.Severity;
 import com.ppm.model.Identity;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.Assert;
 
 /**
  * Implements the UserServices
  *
  * @author Pedro T. Oliveira <pedro.oliveira.nom.br>
  */
+@Service
 public final class UserServicesProvider extends AbstractDomainService implements UserServices {
-
-	@Autowired(required = true)
-	private final Repository<User> userRepository;
-
-	public UserServicesProvider(final Repository<User> userRepository) {
+	
+	private final UserRepository userRepository;
+	
+	@Autowired
+	public UserServicesProvider(final UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
 

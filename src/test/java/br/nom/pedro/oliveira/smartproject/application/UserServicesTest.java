@@ -1,6 +1,6 @@
 package br.nom.pedro.oliveira.smartproject.application;
 
-import static org.junit.Assert.fail;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.mockito.Mockito.when;
 
 import org.junit.After;
@@ -16,6 +16,7 @@ import br.nom.pedro.oliveira.smartproject.domain.Repository;
 import br.nom.pedro.oliveira.smartproject.domain.User;
 import br.nom.pedro.oliveira.smartproject.domain.UserCredentials;
 import br.nom.pedro.oliveira.smartproject.domain.UserId;
+import br.nom.pedro.oliveira.smartproject.domain.UserRepository;
 import br.nom.pedro.oliveira.smartproject.domain.UserToken;
 import br.nom.pedro.oliveira.smartproject.domain.common.Email;
 
@@ -29,7 +30,7 @@ import com.ppm.model.Identity;
 public class UserServicesTest {
 
 	@Mock
-	Repository<User> userRepository;
+	UserRepository userRepository;
 	private UserServices service;
 
 	@Before
@@ -37,9 +38,6 @@ public class UserServicesTest {
 		service = new UserServicesProvider(userRepository);
 	}
 
-	/**
-     *
-     */
 	@After
 	public void tearDown() {
 		service = null;
@@ -48,18 +46,23 @@ public class UserServicesTest {
 
 	@Test
 	public void testWithAValidUserId() throws Exception {
-		
-		 final UserId id = UserId.newId(new Email("pedro@test.com.br"), "passwordtest");
-		 final UserCredentials cred = UserCredentials.newCredentials(UserToken.newToken("1234"), AcessLevel.DEFAULT);
-		 final User expectedUser = User.createUser(id, cred);
-		
-		 when(userRepository.findById(new Identity<UserId>(id))).thenReturn(expectedUser);
-		
-		 Assert.assertEquals("testWithAValidUserId", expectedUser, service.authenticate(id));
+		final UserId id = UserId.newId(new Email("pedro@test.com.br"), "passwordtest");
+		final UserCredentials cred = UserCredentials.newCredentials(UserToken.newToken("1234"), AcessLevel.DEFAULT);
+		final User expectedUser = User.createUser(id, cred);
+
+		when(userRepository.findById(new Identity<UserId>(id))).thenReturn(expectedUser);
+
+		Assert.assertThat(expectedUser, equalTo(service.authenticate(id)));
 	}
-	
+
 	@Test
 	public void testRegister() throws Exception {
-		fail("Not tested");
+		final UserId id = UserId.newId(new Email("pedro@test.com.br"), "passwordtest");
+		final UserCredentials cred = UserCredentials.blockedAccess();
+		final User newUser = User.createUser(id, cred);
+		
+		final User registredUser = service.register(newUser);
+		
+		Assert.assertThat(registredUser.getCredentials().getTokenValue(), equalTo("1234"));
 	}
 }
