@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /target/classes/*
 /target/maven-archiver/*
 /target/test-classes/*
@@ -5,3 +6,9 @@
 /.settings/*
 *.class
 *~
+=======
+/.settings/*
+/target/*
+*~
+*.class
+>>>>>>> 4c7fddc93194b57e6beb0620f9cff0173dd01df4
