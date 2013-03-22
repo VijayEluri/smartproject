@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="./resources/css/layout.css" rel="stylesheet" type="text/css" />
+        <title>Smart Project - Do It Simple ::</title>
+    </h:head>
+
+    <h:body>        
+        <div id="top">
+            <img src="#" alt="Smart Project Banner" width="800" height="200" class="banner" />
+            <ui:insert name="top">Top</ui:insert>
+        </div>
+        <div id="center" class="center_content">
+            <ui:insert name="content">Content</ui:insert>
+        </div>
+        <div id="bottom">
+            <ui:insert name="bottom">
+                <p>Copyright 2010 Pedro T. Oliveira <br/>
+                    <b>E-mail: suport@pedro.oliveira.nom.br</b><br/>
+                    <b>Twitter: <a href="http://www.twitter.com/pedrotoliveira" target="_blank">www.twitter.com/pedrotoliveira</a></b><br/>
+                </p>
+            </ui:insert>
+        </div>
+    </h:body>    
+</html>

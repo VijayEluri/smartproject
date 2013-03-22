@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:panel header="Register a New Project">
+        <h:form id="register_project_form">
+            <p:messages showDetail="true"/>
+
+            <h:outputLabel id="label_project_name" for="it_project_name" >Project Name: </h:outputLabel>
+            <p:inputText id="it_project_name" required="true" />
+            <p:watermark for="it_project_name" value="Select a project name" />
+            <br />
+            <p:commandButton value="New Project" />
+        </h:form>
+    </p:panel>
+</ui:composition>

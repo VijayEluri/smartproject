@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="./maintemplate.xhtml">
+
+    <ui:define name="top">
+        <h1>Smart Project Main Page</h1>
+        <h:form>
+            <span id="top_menu">
+                <p:commandLink update="${mainPageController.viewIdPanel}"  immediate="true" ajax="true" actionListener="${mainPageController.startNewProject}" >
+                    <h:outputText value="New Project" />
+                </p:commandLink> |
+                <p:commandLink update="${mainPageController.viewIdPanel}" immediate="true" ajax="true" actionListener="${mainPageController.goToProjectDashboard}" >
+                    <h:outputText value="Dashboard" />
+                </p:commandLink>
+            </span>
+        </h:form>
+    </ui:define>
+
+    <ui:define name="content">
+        <p:outputPanel id="${mainPageController.viewIdPanel}">
+            <ui:include src="${mainPageController.currentView}" transient="true" />
+        </p:outputPanel>
+    </ui:define>
+</ui:composition>

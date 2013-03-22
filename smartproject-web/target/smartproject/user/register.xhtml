@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Register a New User</title>
+    </h:head>
+    <h:body>
+        <p:panel header="Register">
+            <h:panelGrid>
+                <h:form>
+                    <h:outputText value="Username / Email: " />
+                    <br />
+                    <h:inputText value="#{loginData.userIdentity}" required="true" label="Username" />
+                    <br />
+                    <h:outputText value="Password: " />
+                    <br />
+                    <p:password value="#{loginData.password}"  required="true" minLength="6"/>
+                    <br />
+                    <h:outputText value="Password Again: " />
+                    <br />
+                    <p:password value=""  required="true" minLength="6"/>
+                    <br />
+                    <h:outputText value="Select Your Locale: " />
+                    <br />
+                    <h:selectOneMenu required="true" value="">
+                        <f:selectItems />
+                    </h:selectOneMenu>
+                    <h:messages errorClass="warning"/>
+                    <br />
+                    <p:commandButton  value="submit" update="growl"/>
+                    <br />
+                </h:form>
+            </h:panelGrid>
+        </p:panel>
+    </h:body>
+</html>
+

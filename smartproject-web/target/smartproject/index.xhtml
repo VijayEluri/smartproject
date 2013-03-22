@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="./maintemplate.xhtml">
+
+    <ui:define name="top">
+        <h1>Smart Project Index Page</h1>
+    </ui:define>
+
+    <ui:define name="content">
+        <p:outputPanel>
+            <h:form prependId="false">
+
+                <p:messages globalOnly="true" showDetail="true" autoUpdate="true" />
+
+                <p:panel header="Login">
+                    <p>
+                        <h:outputLabel for="it_loginusername"> UserName / Email:&nbsp;</h:outputLabel>
+                        <p:inputText id="it_loginusername"  required="true" value="#{loginData.userIdentity}">
+                            <f:validateLength minimum="4" maximum="30" />
+                        </p:inputText>
+                        <p:message for="it_loginusername"/>
+                        <p:watermark for="it_loginusername" value="UserName / Email" />                        
+                    </p>
+                    <p>
+                        <h:outputLabel for="ip_loginpassword" >Password:&nbsp;</h:outputLabel>
+                        <p:password id="ip_loginpassword" required="true" minLength="6" value="#{loginData.password}" />
+                        <p:message for="ip_loginpassword"/>
+                        <p:watermark for="ip_loginpassword" value="Password" />
+                    </p>
+                    <p>
+                        <p:commandButton ajax="false" value="login" update="loginComponent"
+                                         actionListener="#{loginController.doLogin}"
+                                         action="#{loginController.proccessRequest}" />
+                    </p>
+                </p:panel>
+            </h:form>
+            <p>
+                <h:link outcome="/user/register" >Dont have a user? Register here!</h:link>
+            </p>
+        </p:outputPanel>
+    </ui:define>
+</ui:composition>
